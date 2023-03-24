@@ -1,0 +1,6 @@
+docker run \
+    --rm \
+    --platform=linux/amd64 \
+    -v $(pwd):/tmp/repo \
+    snakemake/snakemake:stable \
+    snakemake --use-conda -j $@

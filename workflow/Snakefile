@@ -1,4 +1,52 @@
-# Main entrypoint of the workflow. 
-# Please follow the best practices: 
-# https://snakemake.readthedocs.io/en/stable/snakefiles/best_practices.html,
-# in particular regarding the standardized folder structure mentioned there. 
+configfile: "config/config.yaml"
+SAMPLES = config['samples']
+
+rule all:
+    input:
+        "results/calls/all.vcf",
+        "results/plots/quals.html"
+
+rule map_reads:
+    input:
+        config['genome'],
+        config['samples_dir'] + "/{sample}.fastq"
+    output:
+        "results/mapped/{sample}.bam"
+    conda:
+        "envs/mapping.yaml"
+    shell:
+        "bwa mem {input} | samtools view -b - > {output}"
+
+
+rule sort_alignments:
+    input:
+        "results/mapped/{sample}.bam"
+    output:
+        "results/mapped/{sample}.sorted.bam"
+    conda:
+        "envs/mapping.yaml"
+    shell:
+        "samtools sort -o {output} {input}"
+
+
+rule call_variants:
+    input:
+        fa="data/genome.fa",
+        bam=expand("results/mapped/{sample}.sorted.bam", sample=SAMPLES)
+    output:
+        "results/calls/all.vcf"
+    conda:
+        "envs/calling.yaml"
+    shell:
+        "bcftools mpileup -f {input.fa} {input.bam} | bcftools call -mv - > {output}"
+
+
+rule plot_quals:
+    input:
+        "results/calls/all.vcf"
+    output:
+        "results/plots/quals.html"
+    conda:
+        "envs/stats.yaml"
+    script:
+        "scripts/plot-quals.py"

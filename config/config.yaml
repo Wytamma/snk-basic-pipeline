@@ -1,0 +1,4 @@
+container: "docker://continuumio/miniconda3:4.4.10"
+samples: ["A", "B", "C"]
+genome: "data/genome.fa"
+samples_dir: "data/samples"
