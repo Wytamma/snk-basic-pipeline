@@ -2,11 +2,9 @@ annotations: # snk will use these annotations to improve the cli
   genome:
     type: Path
     help: "Path to the reference genome."
-    required: True
   samples:
     type: List
     help: "Samples to map to the reference genome."
-    required: True
   samples_dir:
     type: Path
     help: "Directory of samples."
