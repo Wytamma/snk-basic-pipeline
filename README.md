@@ -1,6 +1,6 @@
 # EXAMPLE WORKFLOW
 
-This is a simple snakemake worflow that demonstrates how to use snk. 
+This is a simple snakemake worflow that demonstrates how to use [snk](https://snk.wytamma.com/). 
 
 # Installation 
 
