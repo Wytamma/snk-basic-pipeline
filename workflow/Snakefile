@@ -1,5 +1,5 @@
 configfile: "config/config.yaml"
-SAMPLES = config['samples']
+SAMPLES = config['sample']
 
 rule all:
     input:

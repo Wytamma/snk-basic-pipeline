@@ -4,3 +4,4 @@ logs/**
 .snakemake
 .snakemake/**
 data/
+v5.4.5.tar.gz
