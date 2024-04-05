@@ -1,5 +1,3 @@
----
-snakefile: snakeFile
 reason: True
 show-failed-logs: True
 keep-going: True
