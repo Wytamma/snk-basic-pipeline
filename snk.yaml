@@ -1,3 +1,4 @@
+version: test
 cli: # snk will use these annotations to improve the cli
   genome:
     type: Path
